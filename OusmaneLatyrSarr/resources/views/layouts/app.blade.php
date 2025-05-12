@@ -1,36 +1,39 @@
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Bibliothèque</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Navbar -->
+    <header class="bg-blue-900 text-white shadow">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Ma Bibliothèque</h1>
+            <nav class="space-x-6">
+                <a href="{{ route('books.create') }}" class="hover:underline">Livres</a>
+                <a href="#" class="hover:underline">Contact</a>
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="hover:underline">Déconnexion</button>
+                </form>
+            </nav>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
         </div>
-    </body>
+    </header>
+
+    <!-- Contenu principal -->
+            <!-- Contenu principal -->
+        <main class="flex-grow py-12 px-6 max-w-5xl mx-auto">
+            @yield('content')
+        </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center py-4 mt-12">
+        <p>&copy; {{ date('Y') }} Ma Bibliothèque. Tous droits réservés.</p>
+    </footer>
+
+</body>
 </html>
